@@ -82,7 +82,7 @@
             <div> <img v-bind:src="playersInfo[n - 1].avatar"> {{ playersInfo[n - 1].name }}</div>
             <div>{{ playersInfo[n - 1].rank + ' [' + playersInfo[n - 1].rmm + ']' }}</div>
             <div class="center">
-              <img v-for="heroPlayer in playersInfo[n - 1].heroes" v-bind:src="heroes.find(hero => hero.id === parseInt(heroPlayer.id)).avatar">
+              <img v-for="heroPlayer in playersInfo[n - 1].heroes" v-bind:src="(playersInfo[n - 1].name != 'Anon') ? heroes.find(hero => hero.id === parseInt(heroPlayer.id)).avatar : './images/empty_hero_icon.svg'">
             </div>
             <div><div class="link" v-on:click="openLink('https://www.opendota.com/players/' + playersInfo[n - 1].id)">Opendota</div></div>
           </div>
@@ -93,7 +93,7 @@
             <div> <img v-bind:src="playersInfo[n + 4].avatar"> {{ playersInfo[n + 4].name }}</div>
             <div>{{ playersInfo[n + 4].rank + ' [' + playersInfo[n + 4].rmm + ']' }}</div>
             <div class="center">
-              <img v-for="heroPlayer in playersInfo[n + 4].heroes" v-bind:src="heroes.find(hero => hero.id === parseInt(heroPlayer.id)).avatar">
+              <img v-for="heroPlayer in playersInfo[n + 4].heroes" v-bind:src="(playersInfo[n + 4].name != 'Anon') ? heroes.find(hero => hero.id === parseInt(heroPlayer.id)).avatar : './images/empty_hero_icon.svg'">
             </div>
             <div><div class="link" v-on:click="openLink('https://www.opendota.com/players/' + playersInfo[n + 4].id)">Opendota</div></div>
           </div>
@@ -133,6 +133,15 @@
             <div class="center" v-bind:class="{ max: isMax(5, playersInfo[n + 4].totals[0].healing) }">{{ playersInfo[n + 4].totals[0].healing }}</div>
           </div>
         </div>
+    </div>
+    <div v-bind:class="{ active: isActiveContent == 2 }">
+      <div class="fairPlay">
+        <div>
+          <div class="noCheats"></div><br>
+          {{ locale('Fair play preview') }}
+           <br><div class="link" v-on:click="openLink('https://www.donationalerts.ru/c/deeezign')">{{ locale('Help us') }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

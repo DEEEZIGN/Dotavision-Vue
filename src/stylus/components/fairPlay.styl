@@ -1,0 +1,35 @@
+.fairPlay
+    width 50%
+    height 100%
+    display table
+    margin 0 auto
+
+    & > div
+        display table-cell
+        vertical-align middle
+        text-align center
+
+        & .link
+            margin-top: 10px
+            padding: 0 20px
+            height: 30px
+            line-height: 30px
+            background: MainColor
+            display: inline-block
+            cursor pointer
+            color: lighten(MainColorDark, 100%)
+
+            &:hover
+                background lighten(MainColor, 10%)
+
+        & .noCheats
+            height 100px
+            width 100px
+            display inline-block
+            margin-bottom 20px
+            -webkit-mask-size 100%
+            -webkit-mask-image url(images/doping.svg)
+            -webkit-mask-repeat no-repeat
+            -webkit-mask-position center
+            background-color lighten(MainColorDark, 80%)
+

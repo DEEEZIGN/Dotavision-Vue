@@ -16,7 +16,7 @@
             <input type="radio" name="theme" :checked="checked('theme','dark')" v-on:click="change('theme','dark')" id="theme-1"><label for="theme-1">{{ locale('Dark') }}</label>
             <input type="radio" name="theme" :checked="checked('theme','red')" v-on:click="change('theme','red')" id="theme-2"><label for="theme-2">{{ locale('Red') }}</label>
           </p>
-          <h4>{{ locale('Pre-match analisys') }}</h4>
+          <h4>{{ locale('Pre-match analisys refresh') }}</h4>
           <p>
             <span>{{ locale('Most popular heroes for') }}:</span>
             <input type="radio" name="mostPopularHeroes" :checked="checked('mostPopularHeroes','0')" v-on:click="change('mostPopularHeroes','0')" id="mostPopularHeroes-0"><label for="mostPopularHeroes-0">{{ locale('All time') }}</label>

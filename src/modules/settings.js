@@ -6,6 +6,8 @@ if (!settings.has('language')) {
 
 if (!settings.has('theme')) {
     settings.set('theme', 'default');
+} else {
+    settings.set('theme', settings.get('theme').toLowerCase());
 }
 
 if (!settings.has('mostPopularHeroes')) {
@@ -14,4 +16,8 @@ if (!settings.has('mostPopularHeroes')) {
 
 if (!settings.has('totals')) {
     settings.set('totals', '20');
+}
+
+if (!settings.has('playersInLastLobby')) {
+    settings.set('playersInLastLobby', new Array(10));
 }

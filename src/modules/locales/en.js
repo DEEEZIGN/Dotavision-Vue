@@ -4,6 +4,7 @@
  "Settings": "Settings",
  "About": "About",
  "Global": "Global (restart required)",
+ "Pre-match analisys refresh": "Pre-match analisys (during the next data refresh)",
  "Language": "Language",
  "English": "English",
  "Russian": "Русский",
@@ -48,5 +49,11 @@
  "GPM": "GPM",
  "XPM": "XPM",
  "Damage": "Damage",
- "Healing": "Healing"
+ "Healing": "Healing",
+ "Fair play": "Fair play",
+ "Beta": "Beta",
+ "Fair play preview": "We are against cheats and already tested a new feature that will allow you to identify cheaters in the game and disable their cheats.",
+ "Help us": "Help us",
+ "Path to server log": "Path to server log",
+ "Only for windows 7": "Only for windows 7"
 }

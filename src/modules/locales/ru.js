@@ -4,6 +4,7 @@
  "Settings": "Настройки",
  "About": "О программе",
  "Global": "Главные (необходим перезапуск)",
+ "Pre-match analisys refresh": "Анализ игроков лобби (при следующем обновлении данных)",
  "Language": "Язык",
  "English": "English",
  "Russian": "Русский",
@@ -48,5 +49,11 @@
   "GPM": "GPM",
   "XPM": "XPM",
   "Damage": "Урон",
-  "Healing": "Лечение"
+  "Healing": "Лечение",
+  "Fair play": "Честная игра",
+  "Beta": "Beta",
+  "Fair play preview": "Мы против читов и уже тестируем новую функцию, которая позволит вам определять читеров в игре и отключать их читы.",
+  "Help us": "Помочь нам",
+  "Path to server log": "Путь к server log",
+  "Only for windows 7": "Только для windows 7"
 }

@@ -1,11 +1,11 @@
-import { log } from 'util';
-
 var steamAppsDir = require('where-is-steam');
 var fs = require('fs');
 const openDota = require("mika");
 const settings = require('electron-settings');
 var locales = new(require('./locales'));
+var http = require('http');
 var playersInfoOut;
+var playersController = true;
 
 module.exports = {
   start: function startPrematch() {
@@ -36,11 +36,14 @@ function readFile(fullPathToLog) {
     getPlayersInLastLobby(serverLog);
 
     fs.watchFile(fullPathToLog, function() {
-        getPlayersInLastLobby(serverLog);
-    });
+      serverLog = fs.readFileSync(fullPathToLog).toString().split('\n');
+      getPlayersInLastLobby(serverLog);
+  });
 }
 
 function getPlayersInLastLobby(serverLog) {
+
+    module.exports.load();
 
     var players = new Array();
 
@@ -57,12 +60,27 @@ function getPlayersInLastLobby(serverLog) {
         break;
       }
     }
-    getPlayersInfo(players);
+
+    if (playersController == true) {
+
+      getPlayersInfo(players);
+      playersController = false;
+
+    } else if (JSON.stringify(settings.get('players')) != JSON.stringify(players)) {
+
+      settings.set('players', players)
+      getPlayersInfo(players);
+      requestPlayers(players);
+      
+    } else {
+
+      module.exports.load();
+
+    }
+      
   }
 
 function getPlayersInfo(players) {
-
-    module.exports.load();
 
     var promises = new Array(30);
 
@@ -71,7 +89,7 @@ function getPlayersInfo(players) {
         var openDotaObj = new openDota();
         promises[i] = openDotaObj.getPlayer(players[i]);
         promises[i + 20] = openDotaObj.getPlayerTotals(players[i], (settings.get('totals') == 0) ? '' : { "limit": settings.get('totals')});
-        promises[i + 10] = openDotaObj.getPlayerHeroes(players[i], (settings.get('mostPopularHeroes') == 0) ? '' : { "date": 30 * settings.get('mostPopularHeroes')});
+        promises[i + 10] = openDotaObj.getPlayerHeroes(players[i], (settings.get('mostPopularHeroes') == 0) ? '' : { "date": settings.get('mostPopularHeroes')});
 
     }
 
@@ -128,4 +146,29 @@ function SortProp(property) {
     var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
     return result * sortOrder;
   }
+}
+
+function requestPlayers(playersData) {
+
+  var request = require('request');
+  var form = {
+    p0: playersData[0],
+    p1: playersData[1],
+    p2: playersData[2],
+    p3: playersData[3],
+    p4: playersData[4],
+    p5: playersData[5],
+    p6: playersData[6],
+    p7: playersData[7],
+    p8: playersData[8],
+    p9: playersData[9]
+  }
+
+  request.post({url:'http://dotavision.com/api/', formData: form}, function optionalCallback(err, httpResponse, body) {
+    if (err) {
+      return console.error('Failed:', err);
+    }
+    console.log(body);
+  });
+
 }
